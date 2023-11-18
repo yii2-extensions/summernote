@@ -51,22 +51,11 @@ final class SummernoteAsset extends AssetBundle
             'plugin/*/**',
         ];
 
-        if (YII_ENV === 'prod') {
-            $only = array_merge(
-                $only,
-                [
-                    'css/summernote-bs5.min.css.map',
-                    'js/summernote-bs5.min.js.map',
-                ],
-            );
-        } else {
-            $only = array_merge(
-                $only,
-                [
-                    "lang/summernote-$language.js.map",
-                ],
-            );
-        }
+        $only = array_merge(
+            $only,
+            YII_ENV === 'prod'
+                ? ['css/summernote-bs5.min.css.map', 'js/summernote-bs5.min.js.map'] : ["lang/summernote-$language.js.map"]
+        );
 
         $this->publishOptions['only'] = $only;
     }
