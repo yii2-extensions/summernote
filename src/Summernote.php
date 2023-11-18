@@ -72,7 +72,7 @@ final class Summernote extends InputWidget
     {
         return TextArea::widget()
             ->attributes($this->options)
-            ->content($this->value)
+            ->content((string) $this->value)
             ->id($this->id)
             ->name(Utils::generateInputName($this->model->formName(), $this->attribute))
             ->render();
