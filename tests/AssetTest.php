@@ -41,7 +41,7 @@ final class AssetTest extends TestCase
         $this->assertCount(4, $view->assetBundles);
         $this->assertInstanceOf(AssetBundle::class, $view->assetBundles[SummernoteAsset::class]);
 
-        $result = $view->renderFile(__DIR__ . '/support/main.php');
+        $result = $view->renderFile(__DIR__ . '/Support/main.php');
 
         $this->assertStringContainsString('bootstrap.css', $result);
         $this->assertStringContainsString('bootstrap.css.map', $result);
