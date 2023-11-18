@@ -52,8 +52,14 @@ final class Summernote extends InputWidget
 
         return <<<JS
             $('#$this->id').summernote($config);
-            $('button.note-btn.btn-light.btn-sm.dropdown-toggle').removeAttr('data-toggle');
-            $('button.note-btn.btn-light.btn-sm.dropdown-toggle').attr('data-bs-toggle', 'dropdown');
+
+            if ($('button.note-btn.btn-light.btn-sm.dropdown-toggle').attr('data-toggle') !== undefined) {
+                $('button.note-btn.btn-light.btn-sm.dropdown-toggle').removeAttr('data-toggle');
+            }
+
+            if ($('button.note-btn.btn-light.btn-sm.dropdown-toggle').attr('data-bs-toggle') === undefined) {
+                $('button.note-btn.btn-light.btn-sm.dropdown-toggle').attr('data-bs-toggle', 'dropdown');
+            }
         JS;
     }
 
