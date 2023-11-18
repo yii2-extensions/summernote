@@ -8,6 +8,7 @@ use JsonException;
 use PHPForge\Html\Helper\Utils;
 use PHPForge\Html\TextArea;
 use RuntimeException;
+use Yii;
 use yii\widgets\InputWidget;
 
 final class Summernote extends InputWidget
@@ -32,7 +33,7 @@ final class Summernote extends InputWidget
         }
 
         $this->id = Utils::generateInputId($this->model->formName(), $this->attribute);
-        $this->config = array_merge([], $this->config);
+        $this->config = array_merge(['lang' => Yii::$app->language], $this->config);
     }
 
     public function run(): string

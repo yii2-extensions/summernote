@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Yii2\Extensions\Summernote;
 
+use Yii;
 use Yii2\Asset\BootstrapPluginAsset;
 use yii\web\AssetBundle;
 use yii\web\JqueryAsset;
@@ -42,6 +43,22 @@ final class SummernoteAsset extends AssetBundle
 
         $this->js = $assetSummernoteJs;
 
-        $this->publishOptions['only'] = array_merge($assetSummernoteCss, $assetSummernoteJs, ['font/*']);
+        $this->publishOptions['only'] = array_merge(
+            $assetSummernoteCss,
+            $assetSummernoteJs,
+            ['font/*'],
+        );
+
+        $this->registerAssetLanguage();
+    }
+
+    private function registerAssetLanguage(): void
+    {
+        $language = Yii::$app->language;
+        $assetLanguage = ["lang/summernote-$language.js", "lang/summernote-$language.js.map"];
+
+        $this->js[] = ["lang/summernote-$language.js"];
+        $this->js[] = ["lang/summernote-$language.js.map"];
+        $this->publishOptions['only'] = array_merge($this->publishOptions['only'], $assetLanguage);
     }
 }

@@ -44,7 +44,7 @@ final class RenderTest extends TestCase
 
         $this->assertStringContainsString(
             <<<JS
-            $('#testform-content').summernote({"focus":true,"height":200,"maxHeight":null,"minHeight":null,"placeholder":"Write here..."});
+             $('#testform-content').summernote({"lang":"en-US","focus":true,"height":200,"maxHeight":null,"minHeight":null,"placeholder":"Write here..."});
             JS,
             $result,
         );
