@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Yii2\Extensions\Summernote\Tests;
 
-use Yii;
 use Yii2\Extensions\Summernote\Summernote;
 use Yii2\Extensions\Summernote\Tests\Support\TestForm;
+use Yii;
 
 /**
  * @psalm-suppress PropertyNotSetInConstructor

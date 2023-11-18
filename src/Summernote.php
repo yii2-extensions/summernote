@@ -8,6 +8,7 @@ use JsonException;
 use PHPForge\Html\Helper\Utils;
 use PHPForge\Html\TextArea;
 use RuntimeException;
+use Yii2\Extensions\Summernote\Asset\SummernoteAsset;
 use Yii;
 use yii\widgets\InputWidget;
 
@@ -33,7 +34,12 @@ final class Summernote extends InputWidget
         }
 
         $this->id = Utils::generateInputId($this->model->formName(), $this->attribute);
-        $this->config = array_merge(['lang' => Yii::$app->language], $this->config);
+        $this->config = array_merge(
+            [
+                'lang' => Yii::$app->language,
+            ],
+            $this->config,
+        );
     }
 
     public function run(): string
@@ -51,14 +57,16 @@ final class Summernote extends InputWidget
         $config = json_encode($this->config, JSON_THROW_ON_ERROR);
 
         return <<<JS
-            $('#$this->id').summernote($config);
+            $('#{$this->id}').summernote($config);
 
-            if ($('button.note-btn.btn-light.btn-sm.dropdown-toggle').attr('data-toggle') !== undefined) {
-                $('button.note-btn.btn-light.btn-sm.dropdown-toggle').removeAttr('data-toggle');
+            var dropdownToggle = $('button.note-btn.btn-light.btn-sm.dropdown-toggle');
+
+            if (dropdownToggle.attr('data-toggle') !== undefined) {
+                dropdownToggle.removeAttr('data-toggle');
             }
 
-            if ($('button.note-btn.btn-light.btn-sm.dropdown-toggle').attr('data-bs-toggle') === undefined) {
-                $('button.note-btn.btn-light.btn-sm.dropdown-toggle').attr('data-bs-toggle', 'dropdown');
+            if (dropdownToggle.attr('data-bs-toggle') === undefined) {
+                dropdownToggle.attr('data-bs-toggle', 'dropdown');
             }
         JS;
     }

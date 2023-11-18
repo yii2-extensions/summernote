@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Yii2\Extensions\Summernote\Tests;
 
-use Yii;
 use Yii2\Asset\BootstrapAsset;
 use Yii2\Asset\BootstrapPluginAsset;
-use Yii2\Extensions\Summernote\SummernoteAsset;
+use Yii2\Extensions\Summernote\Asset\SummernoteAsset;
+use Yii;
 use yii\web\AssetBundle;
 use yii\web\JqueryAsset;
 use yii\web\View;
@@ -41,15 +41,13 @@ final class AssetTest extends TestCase
         $this->assertCount(4, $view->assetBundles);
         $this->assertInstanceOf(AssetBundle::class, $view->assetBundles[SummernoteAsset::class]);
 
+        $language = Yii::$app->language;
         $result = $view->renderFile(__DIR__ . '/Support/main.php');
 
         $this->assertStringContainsString('bootstrap.css', $result);
-        $this->assertStringContainsString('bootstrap.css.map', $result);
         $this->assertStringContainsString('summernote-bs5.css', $result);
-        $this->assertStringContainsString('summernote-bs5.css.map', $result);
         $this->assertStringContainsString('bootstrap.bundle.js', $result);
-        $this->assertStringContainsString('bootstrap.bundle.js.map', $result);
         $this->assertStringContainsString('summernote-bs5.js', $result);
-        $this->assertStringContainsString('summernote-bs5.js.map', $result);
+        $this->assertStringContainsString("lang/summernote-$language.js", $result);
     }
 }

@@ -13,7 +13,6 @@
     "prefer-stable": true,
     "require": {
         "php": ">=8.1",
-        "npm-asset/summernote": "^0.8.20",
         "oomphinc/composer-installers-extender": "^2.0",
         "php-forge/html": "dev-main",
         "yii2-extensions/asset-bootstrap5": "dev-main",
