@@ -51,6 +51,5 @@ final class AssetTest extends TestCase
         $this->assertStringContainsString('bootstrap.bundle.js.map', $result);
         $this->assertStringContainsString('summernote-bs5.js', $result);
         $this->assertStringContainsString('summernote-bs5.js.map', $result);
-
     }
 }

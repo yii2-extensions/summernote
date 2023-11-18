@@ -59,7 +59,7 @@ final class RenderTest extends TestCase
                 'attribute' => 'content',
                 'model' => new TestForm(),
                 'options' => [
-                    'class' => 'test-class'
+                    'class' => 'test-class',
                 ],
             ],
         );
