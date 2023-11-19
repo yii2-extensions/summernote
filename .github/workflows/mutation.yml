@@ -26,6 +26,8 @@ jobs:
       AUTH_TOKEN: ${{ secrets.AUTH_TOKEN }}
       STRYKER_DASHBOARD_API_KEY: ${{ secrets.STRYKER_DASHBOARD_API_KEY }}
     with:
+      composer-command: |
+        composer require yiisoft/yii2:^2.2.x-dev --prefer-dist --no-progress --no-suggest --no-interaction --no-scripts --ansi
       os: >-
         ['ubuntu-latest']
       php: >-
