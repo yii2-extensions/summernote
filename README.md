@@ -13,6 +13,9 @@
     <a href="https://github.com/yii2-extensions/summernote/actions/workflows/build.yml" target="_blank">
         <img src="https://github.com/yii2-extensions/summernote/actions/workflows/build.yml/badge.svg" alt="PHPUnit">
     </a>
+    <a href="https://github.com/yii2-extensions/summernote/actions/workflows/compatibility.yml" target="_blank">
+        <img src="https://github.com/yii2-extensions/summernote/actions/workflows/compatibility.yml/badge.svg" alt="PHPUnit">
+    </a>    
     <a href="https://codecov.io/gh/yii2-extensions/summernote" target="_blank">
         <img src="https://codecov.io/gh/yii2-extensions/summernote/branch/main/graph/badge.svg?token=MF0XUGVLYC" alt="Codecov">
     </a>
@@ -63,6 +66,7 @@ echo $form
         ]
     );
 ```
+
 ## Quality code
 
 [![static-analysis](https://github.com/yii2-extensions/gii/actions/workflows/static.yml/badge.svg)](https://github.com/yii2-extensions/summernote/actions/workflows/static.yml)
@@ -72,7 +76,7 @@ echo $form
 ## Support versions Yii2
 
 [![Yii20](https://img.shields.io/badge/Yii2%20version-2.0-blue)](https://github.com/yiisoft/yii2/tree/2.0.49.3)
-[![Yii22](https://img.shields.io/badge/Yii2%20version-2.2-blue)](https://img.shields.io/badge/Yii2%20version-2.2-blue)
+[![Yii22](https://img.shields.io/badge/Yii2%20version-2.2-blue)](https://github.com/yiisoft/yii2/tree/2.2)
 
 ## Testing
 
