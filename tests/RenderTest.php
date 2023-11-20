@@ -13,12 +13,16 @@ use Yii;
  */
 final class RenderTest extends TestCase
 {
-    public function testConfig(): void
+    public function setup(): void
     {
+        parent::setUp();
         $this->mockApplication();
 
-        $view = Yii::$app->getView();
+        $this->view = Yii::$app->getView();
+    }
 
+    public function testConfig(): void
+    {
         $filePond = Summernote::widget(
             [
                 'attribute' => 'content',
@@ -40,7 +44,7 @@ final class RenderTest extends TestCase
             $filePond,
         );
 
-        $result = $view->renderFile(__DIR__ . '/Support/main.php');
+        $result = $this->view->renderFile(__DIR__ . '/Support/main.php');
 
         $this->assertStringContainsString(
             <<<JS
@@ -52,8 +56,6 @@ final class RenderTest extends TestCase
 
     public function testOptions(): void
     {
-        $this->mockApplication();
-
         $filePond = Summernote::widget(
             [
                 'attribute' => 'content',
@@ -74,8 +76,6 @@ final class RenderTest extends TestCase
 
     public function testRender(): void
     {
-        $this->mockApplication();
-
         $filePond = Summernote::widget(
             [
                 'attribute' => 'content',

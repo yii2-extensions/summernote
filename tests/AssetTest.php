@@ -10,39 +10,42 @@ use Yii2\Extensions\Summernote\Asset\SummernoteAsset;
 use Yii;
 use yii\web\AssetBundle;
 use yii\web\JqueryAsset;
-use yii\web\View;
 
 final class AssetTest extends TestCase
 {
+    public function setup(): void
+    {
+        parent::setUp();
+        $this->mockApplication();
+
+        $this->view = Yii::$app->getView();
+    }
+
     public function testBootstrapAssetSimpleDependency(): void
     {
-        $view = Yii::$app->getView();
+        $this->assertEmpty($this->view->assetBundles);
 
-        $this->assertEmpty($view->assetBundles);
+        SummernoteAsset::register($this->view);
 
-        SummernoteAsset::register($view);
+        $this->assertCount(4, $this->view->assetBundles);
 
-        $this->assertCount(4, $view->assetBundles);
-
-        $this->assertArrayHasKey(BootstrapAsset::class, $view->assetBundles);
-        $this->assertArrayHasKey(BootstrapPluginAsset::class, $view->assetBundles);
-        $this->assertArrayHasKey(JqueryAsset::class, $view->assetBundles);
-        $this->assertArrayHasKey(SummernoteAsset::class, $view->assetBundles);
+        $this->assertArrayHasKey(BootstrapAsset::class, $this->view->assetBundles);
+        $this->assertArrayHasKey(BootstrapPluginAsset::class, $this->view->assetBundles);
+        $this->assertArrayHasKey(JqueryAsset::class, $this->view->assetBundles);
+        $this->assertArrayHasKey(SummernoteAsset::class, $this->view->assetBundles);
     }
 
     public function testBootstrapAssetRegister(): void
     {
-        $view = new View();
+        $this->assertEmpty($this->view->assetBundles);
 
-        $this->assertEmpty($view->assetBundles);
+        SummernoteAsset::register($this->view);
 
-        SummernoteAsset::register($view);
-
-        $this->assertCount(4, $view->assetBundles);
-        $this->assertInstanceOf(AssetBundle::class, $view->assetBundles[SummernoteAsset::class]);
+        $this->assertCount(4, $this->view->assetBundles);
+        $this->assertInstanceOf(AssetBundle::class, $this->view->assetBundles[SummernoteAsset::class]);
 
         $language = Yii::$app->language;
-        $result = $view->renderFile(__DIR__ . '/Support/main.php');
+        $result = $this->view->renderFile(__DIR__ . '/Support/main.php');
 
         $this->assertStringContainsString('bootstrap.css', $result);
         $this->assertStringContainsString('summernote-bs5.css', $result);
