@@ -10,7 +10,6 @@ use Yii2\Extensions\Summernote\Asset\SummernoteAsset;
 use Yii;
 use yii\web\AssetBundle;
 use yii\web\JqueryAsset;
-use yii\web\View;
 
 final class AssetTest extends TestCase
 {
