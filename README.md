@@ -46,7 +46,7 @@ to the require-dev section of your `composer.json` file.
 
 ## Usage
 
-### View 
+### Basic
 
 ```php
 use Yii2\Extensions\Summernote\Summernote;
@@ -66,6 +66,15 @@ echo $form
         ]
     );
 ```
+
+### Properties of the widget
+
+| Property | Type     | Description                      | Default |
+|----------|----------|----------------------------------|---------|
+| `config` | `array ` | The configuration of the widget. | `[]`    |
+
+> When YII_ENV is set to `dev` or `test`, the widget will load the non-minified version of the JavaScript files,
+> otherwise it will load the minified version.
 
 ## Quality code
 

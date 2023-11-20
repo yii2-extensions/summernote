@@ -8,12 +8,15 @@ use PHPForge\Support\Assert;
 use Yii;
 use yii\di\Container;
 use yii\web\Application;
+use yii\web\View;
 
 /**
  * This is the base class for all yii framework unit tests.
  */
 abstract class TestCase extends \PHPUnit\Framework\TestCase
 {
+    protected View $view;
+
     protected function destroyApplication()
     {
         Yii::$app = null;
@@ -26,15 +29,12 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
             [
                 'id' => 'testapp',
                 'aliases' => [
-                    '@app' => dirname(__DIR__),
-                    '@bower' => '@app/node_modules',
-                    '@npm' => '@app/node_modules',
-                    '@public' => '@app/public',
-                    '@vendor' => '@app/vendor',
-                    '@web' => __DIR__ . '/Support/runtime',
+                    '@root' => dirname(__DIR__),
+                    '@bower' => '@root/node_modules',
+                    '@npm' => '@root/node_modules',
+                    '@vendor' => '@root/vendor',
                 ],
                 'basePath' => dirname(__DIR__),
-                'vendorPath' => dirname(__DIR__) . '/vendor',
                 'components' => [
                     'assetManager' => [
                         'basePath' => __DIR__ . '/Support/runtime',
@@ -60,5 +60,7 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
         parent::tearDown();
         $this->destroyApplication();
         Assert::removeFilesFromDirectory(__DIR__ . '/Support/runtime');
+
+        unset($this->view);
     }
 }

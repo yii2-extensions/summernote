@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+defined('YII_DEBUG') || define('YII_DEBUG', false);
 define('YII_ENV', 'test');
 
 $root = dirname(__DIR__, 2);
@@ -19,5 +20,3 @@ if (!is_file($yii2)) {
 
 require_once $autoload;
 require_once $yii2;
-
-Yii::setAlias('@root', $root);
