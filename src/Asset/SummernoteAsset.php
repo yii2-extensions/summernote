@@ -46,8 +46,8 @@ final class SummernoteAsset extends AssetBundle
         $only = [
             $assetCss,
             $assetJs,
-            $assetLang,
             'css/font/*',
+            'lang/*',
             'plugin/*/**',
         ];
 
