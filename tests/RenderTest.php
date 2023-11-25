@@ -44,11 +44,32 @@ final class RenderTest extends TestCase
             $filePond,
         );
 
-        $result = $this->view->renderFile(__DIR__ . '/Support/main.php');
+        $result = $this->view->renderFile(__DIR__ . '/Support/main.php', ['widget' => $filePond]);
 
         $this->assertStringContainsString(
             <<<JS
              $('#testform-content').summernote({"lang":"en-US","focus":true,"height":200,"maxHeight":null,"minHeight":null,"placeholder":"Write here..."});
+            JS,
+            $result,
+        );
+    }
+
+    public function testName(): void
+    {
+        $filePond = Summernote::widget(['name' => 'summernote']);
+
+        $this->assertSame(
+            <<<HTML
+            <textarea id="w0-summernote" name="summernote"></textarea>
+            HTML,
+            $filePond,
+        );
+
+        $result = $this->view->renderFile(__DIR__ . '/Support/main.php', ['widget' => $filePond]);
+
+        $this->assertStringContainsString(
+            <<<JS
+             $('#w0-summernote').summernote({"lang":"en-US"});
             JS,
             $result,
         );
@@ -88,6 +109,15 @@ final class RenderTest extends TestCase
             <textarea id="testform-content" name="TestForm[content]"></textarea>
             HTML,
             $filePond,
+        );
+
+        $result = $this->view->renderFile(__DIR__ . '/Support/main.php', ['widget' => $filePond]);
+
+        $this->assertStringContainsString(
+            <<<JS
+             $('#testform-content').summernote({"lang":"en-US"});
+            JS,
+            $result,
         );
     }
 }

@@ -45,7 +45,7 @@ final class AssetTest extends TestCase
         $this->assertInstanceOf(AssetBundle::class, $this->view->assetBundles[SummernoteAsset::class]);
 
         $language = Yii::$app->language;
-        $result = $this->view->renderFile(__DIR__ . '/Support/main.php');
+        $result = $this->view->renderFile(__DIR__ . '/Support/main.php', ['widget' => '']);
 
         $this->assertStringContainsString('bootstrap.css', $result);
         $this->assertStringContainsString('summernote-bs5.css', $result);

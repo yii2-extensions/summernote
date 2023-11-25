@@ -1,4 +1,14 @@
 <?php
-/* @var $this \yii\web\View */
-?>
-<?php $this->beginPage();?>1<?php $this->head();?>2<?php $this->beginBody();?>3<?php $this->endBody();?>4<?php $this->endPage();
+
+declare(strict_types=1);
+
+/**
+ * @var \yii\web\View $this
+ * @var string $widget
+ */
+$this->beginPage();
+$this->head();
+$this->beginBody();
+echo $widget;
+$this->endBody();
+$this->endPage();

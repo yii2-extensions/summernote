@@ -7,7 +7,6 @@ namespace Yii2\Extensions\Summernote;
 use JsonException;
 use PHPForge\Html\Helper\Utils;
 use PHPForge\Html\TextArea;
-use RuntimeException;
 use Yii2\Extensions\Summernote\Asset\SummernoteAsset;
 use Yii;
 use yii\widgets\InputWidget;
@@ -22,24 +21,16 @@ final class Summernote extends InputWidget
      * @phpstan-var array<string, mixed>
      */
     public array $config = [];
+    private string $id = '';
 
     public function init(): void
     {
-        if ($this->model === null) {
-            throw new RuntimeException('The model is not set.');
-        }
+        parent::init();
 
-        if ($this->attribute === null) {
-            throw new RuntimeException('The attribute is not set.');
-        }
-
-        $this->id = Utils::generateInputId($this->model->formName(), $this->attribute);
-        $this->config = array_merge(
-            [
-                'lang' => Yii::$app->language,
-            ],
-            $this->config,
-        );
+        $this->config = array_merge(['lang' => Yii::$app->language], $this->config);
+        $this->id = $this->hasModel()
+            ? Utils::generateInputId($this->model->formName(), $this->attribute)
+            : $this->getId() . '-summernote';
     }
 
     public function run(): string
@@ -85,11 +76,21 @@ final class Summernote extends InputWidget
      */
     private function renderTextArea(): string
     {
-        return TextArea::widget()
+        unset($this->options['id']);
+
+        $textArea = TextArea::widget()
             ->attributes($this->options)
-            ->content((string) $this->value)
-            ->id($this->id)
-            ->name(Utils::generateInputName($this->model->formName(), $this->attribute))
-            ->render();
+            ->content((string) $this->value);
+
+        return match ($this->hasModel()) {
+            true => $textArea
+                ->id($this->id)
+                ->name(Utils::generateInputName($this->model->formName(), $this->attribute))
+                ->render(),
+            default => $textArea
+                ->id($this->id)
+                ->name($this->name)
+                ->render(),
+        };
     }
 }
