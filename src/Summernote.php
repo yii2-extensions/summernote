@@ -7,7 +7,6 @@ namespace Yii2\Extensions\Summernote;
 use JsonException;
 use PHPForge\Html\Helper\Utils;
 use PHPForge\Html\TextArea;
-use RuntimeException;
 use Yii2\Extensions\Summernote\Asset\SummernoteAsset;
 use Yii;
 use yii\widgets\InputWidget;
