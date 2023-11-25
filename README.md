@@ -46,7 +46,27 @@ to the require-dev section of your `composer.json` file.
 
 ## Usage
 
-### Basic
+### Name
+
+```php
+use Yii2\Extensions\Summernote\Summernote;
+
+echo Summernote::widget(
+    [
+        'name' => 'content',
+        'value' => $value,
+        'config' => [
+            'focus' => true,
+            'height' => 200,
+            'maxHeight' => null,
+            'minHeight' => null,
+            'placeholder' => 'Write here...',
+        ],
+    ]
+);
+```
+
+### Active Field
 
 ```php
 use Yii2\Extensions\Summernote\Summernote;
