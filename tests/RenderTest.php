@@ -18,6 +18,8 @@ final class RenderTest extends TestCase
         parent::setUp();
         $this->mockApplication();
 
+        Summernote::$counter = 0;
+
         $this->view = Yii::$app->getView();
     }
 
@@ -89,7 +91,7 @@ final class RenderTest extends TestCase
 
         $this->assertSame(
             <<<HTML
-            <textarea class="test-class" id="testform-content" name="TestForm[content]"></textarea>
+            <textarea id="testform-content" class="test-class" name="TestForm[content]"></textarea>
             HTML,
             $filePond,
         );
@@ -107,6 +109,61 @@ final class RenderTest extends TestCase
         $this->assertSame(
             <<<HTML
             <textarea id="testform-content" name="TestForm[content]"></textarea>
+            HTML,
+            $filePond,
+        );
+
+        $result = $this->view->renderFile(__DIR__ . '/Support/main.php', ['widget' => $filePond]);
+
+        $this->assertStringContainsString(
+            <<<JS
+             $('#testform-content').summernote({"lang":"en-US"});
+            JS,
+            $result,
+        );
+    }
+
+    public function testValue(): void
+    {
+        $filePond = Summernote::widget(
+            [
+                'name' => 'content',
+                'value' => 'test-content',
+            ],
+        );
+
+        $this->assertSame(
+            <<<HTML
+            <textarea id="w0-summernote" name="content">test-content</textarea>
+            HTML,
+            $filePond,
+        );
+
+        $result = $this->view->renderFile(__DIR__ . '/Support/main.php', ['widget' => $filePond]);
+
+        $this->assertStringContainsString(
+            <<<JS
+             $('#w0-summernote').summernote({"lang":"en-US"});
+            JS,
+            $result,
+        );
+    }
+
+    public function testValueWithModel(): void
+    {
+        $model = new TestForm();
+        $model->content = 'test-content';
+
+        $filePond = Summernote::widget(
+            [
+                'attribute' => 'content',
+                'model' => $model,
+            ],
+        );
+
+        $this->assertSame(
+            <<<HTML
+            <textarea id="testform-content" name="TestForm[content]">test-content</textarea>
             HTML,
             $filePond,
         );

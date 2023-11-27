@@ -5,10 +5,9 @@ declare(strict_types=1);
 namespace Yii2\Extensions\Summernote;
 
 use JsonException;
-use PHPForge\Html\Helper\Utils;
-use PHPForge\Html\TextArea;
 use Yii2\Extensions\Summernote\Asset\SummernoteAsset;
 use Yii;
+use yii\helpers\Html;
 use yii\widgets\InputWidget;
 
 final class Summernote extends InputWidget
@@ -29,7 +28,7 @@ final class Summernote extends InputWidget
 
         $this->config = array_merge(['lang' => Yii::$app->language], $this->config);
         $this->id = $this->hasModel()
-            ? Utils::generateInputId($this->model->formName(), $this->attribute)
+            ? Html::getInputId($this->model, $this->attribute)
             : $this->getId() . '-summernote';
     }
 
@@ -76,21 +75,11 @@ final class Summernote extends InputWidget
      */
     private function renderTextArea(): string
     {
-        unset($this->options['id']);
-
-        $textArea = TextArea::widget()
-            ->attributes($this->options)
-            ->content((string) $this->value);
+        $this->options['id'] = $this->id;
 
         return match ($this->hasModel()) {
-            true => $textArea
-                ->id($this->id)
-                ->name(Utils::generateInputName($this->model->formName(), $this->attribute))
-                ->render(),
-            default => $textArea
-                ->id($this->id)
-                ->name($this->name)
-                ->render(),
+            true => Html::activeTextArea($this->model, $this->attribute, $this->options),
+            default => Html::textArea($this->name, $this->value, $this->options),
         };
     }
 }
