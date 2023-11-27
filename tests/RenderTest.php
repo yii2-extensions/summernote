@@ -91,7 +91,7 @@ final class RenderTest extends TestCase
 
         $this->assertSame(
             <<<HTML
-            <textarea class="test-class" id="testform-content" name="TestForm[content]"></textarea>
+            <textarea id="testform-content" class="test-class" name="TestForm[content]"></textarea>
             HTML,
             $filePond,
         );
