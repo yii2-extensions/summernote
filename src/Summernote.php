@@ -9,6 +9,7 @@ use PHPForge\Html\Helper\Utils;
 use PHPForge\Html\TextArea;
 use Yii2\Extensions\Summernote\Asset\SummernoteAsset;
 use Yii;
+use yii\helpers\Html;
 use yii\widgets\InputWidget;
 
 final class Summernote extends InputWidget
@@ -78,16 +79,16 @@ final class Summernote extends InputWidget
     {
         unset($this->options['id']);
 
-        $textArea = TextArea::widget()
-            ->attributes($this->options)
-            ->content((string) $this->value);
+        $textArea = TextArea::widget()->attributes($this->options);
 
         return match ($this->hasModel()) {
             true => $textArea
+                ->content(Html::getAttributeValue($this->model, $this->attribute))
                 ->id($this->id)
                 ->name(Utils::generateInputName($this->model->formName(), $this->attribute))
                 ->render(),
             default => $textArea
+                ->content($this->value ?? '')
                 ->id($this->id)
                 ->name($this->name)
                 ->render(),
