@@ -9,7 +9,7 @@
  * Copyright 2013- Alan Hong and Contributors
  * Summernote may be freely distributed under the MIT license.
  *
- * Date: 2023-12-15T15:47Z
+ * Date: 2023-12-15T15:59Z
  *
  */
 :root {
@@ -1698,7 +1698,6 @@ a.note-dropdown-item:hover {
     top: 0;
     left: 0;
     width: 100% !important;
-    height: 100vh !important;
 }
 .note-editor.note-frame.note-fullscreen .note-editing-area,
 .note-editor.note-airframe.note-fullscreen .note-editing-area {
