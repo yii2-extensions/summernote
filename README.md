@@ -24,7 +24,11 @@
     </a>       
 </p>
 
-![summernote](docs/images/summernote.png)
+<p align="center">
+    <a href="https://github.com/yii2-extensions/summernote" target="_blank">
+        <img src="docs/images/summernote.png">
+    </a>
+</p>
 
 ## Installation
 
