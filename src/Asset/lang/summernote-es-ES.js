@@ -1,189 +1,334 @@
 /*!
  * 
- * Super simple WYSIWYG editor v0.8.20
+ * Summernote Skunkworks
+ *
+ * The Super simple WYSIWYG editor.
+ *
  * https://summernote.org
  *
- *
- * Copyright 2013- Alan Hong and contributors
+ * Copyright 2013- Alan Hong and Contributors
  * Summernote may be freely distributed under the MIT license.
  *
- * Date: 2021-10-14T21:15Z
+ * Date: 2023-12-15T15:47Z
  *
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory();
+		module.exports = factory(require("jquery"));
 	else if(typeof define === 'function' && define.amd)
-		define([], factory);
+		define(["jquery"], factory);
 	else {
-		var a = factory();
+		var a = typeof exports === 'object' ? factory(require("jquery")) : factory(root["jQuery"]);
 		for(var i in a) (typeof exports === 'object' ? exports : root)[i] = a[i];
 	}
-})(self, function() {
+})(self, (__WEBPACK_EXTERNAL_MODULE__549__) => {
 return /******/ (() => { // webpackBootstrap
+/******/ 	"use strict";
+/******/ 	var __webpack_modules__ = ({
+
+/***/ 549:
+/***/ ((module) => {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE__549__;
+
+/***/ })
+
+/******/ 	});
+/************************************************************************/
+/******/ 	// The module cache
+/******/ 	var __webpack_module_cache__ = {};
+/******/ 	
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/ 		// Check if module is in cache
+/******/ 		var cachedModule = __webpack_module_cache__[moduleId];
+/******/ 		if (cachedModule !== undefined) {
+/******/ 			return cachedModule.exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = __webpack_module_cache__[moduleId] = {
+/******/ 			// no module.id needed
+/******/ 			// no module.loaded needed
+/******/ 			exports: {}
+/******/ 		};
+/******/ 	
+/******/ 		// Execute the module function
+/******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
+/******/ 	
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/ 	
+/************************************************************************/
+/******/ 	/* webpack/runtime/compat get default export */
+/******/ 	(() => {
+/******/ 		// getDefaultExport function for compatibility with non-harmony modules
+/******/ 		__webpack_require__.n = (module) => {
+/******/ 			var getter = module && module.__esModule ?
+/******/ 				() => (module['default']) :
+/******/ 				() => (module);
+/******/ 			__webpack_require__.d(getter, { a: getter });
+/******/ 			return getter;
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/define property getters */
+/******/ 	(() => {
+/******/ 		// define getter functions for harmony exports
+/******/ 		__webpack_require__.d = (exports, definition) => {
+/******/ 			for(var key in definition) {
+/******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
+/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
+/******/ 				}
+/******/ 			}
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
+/******/ 	(() => {
+/******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/make namespace object */
+/******/ 	(() => {
+/******/ 		// define __esModule on exports
+/******/ 		__webpack_require__.r = (exports) => {
+/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 			}
+/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/************************************************************************/
 var __webpack_exports__ = {};
-(function ($) {
-  $.extend($.summernote.lang, {
-    'es-ES': {
-      font: {
-        bold: 'Negrita',
-        italic: 'Cursiva',
-        underline: 'Subrayado',
-        clear: 'Eliminar estilo de letra',
-        height: 'Altura de línea',
-        name: 'Tipo de letra',
-        strikethrough: 'Tachado',
-        subscript: 'Subíndice',
-        superscript: 'Superíndice',
-        size: 'Tamaño de la fuente',
-        sizeunit: 'Unidad del tamaño de letra'
-      },
-      image: {
-        image: 'Imagen',
-        insert: 'Insertar imagen',
-        resizeFull: 'Redimensionar a tamaño completo',
-        resizeHalf: 'Redimensionar a la mitad',
-        resizeQuarter: 'Redimensionar a un cuarto',
-        resizeNone: 'Tamaño original',
-        floatLeft: 'Flotar a la izquierda',
-        floatRight: 'Flotar a la derecha',
-        floatNone: 'No flotar',
-        shapeRounded: 'Forma: Redondeado',
-        shapeCircle: 'Forma: Círculo',
-        shapeThumbnail: 'Forma: Miniatura',
-        shapeNone: 'Forma: Ninguna',
-        dragImageHere: 'Arrastre una imagen o texto aquí',
-        dropImage: 'Suelte una imagen o texto',
-        selectFromFiles: 'Seleccione un fichero',
-        maximumFileSize: 'Tamaño máximo del fichero',
-        maximumFileSizeError: 'Superado el tamaño máximo de fichero.',
-        url: 'URL de la imagen',
-        remove: 'Eliminar la imagen',
-        original: 'Original'
-      },
-      video: {
-        video: 'Vídeo',
-        videoLink: 'Enlace del vídeo',
-        insert: 'Insertar un vídeo',
-        url: 'URL del vídeo',
-        providers: '(YouTube, Vimeo, Vine, Instagram, DailyMotion o Youku)'
-      },
-      link: {
-        link: 'Enlace',
-        insert: 'Insertar un enlace',
-        unlink: 'Quitar el enlace',
-        edit: 'Editar',
-        textToDisplay: 'Texto a mostrar',
-        url: '¿A qué URL lleva este enlace?',
-        openInNewWindow: 'Abrir en una nueva ventana',
-        useProtocol: 'Usar el protocolo predefinido'
-      },
-      table: {
-        table: 'Tabla',
-        addRowAbove: 'Añadir una fila encima',
-        addRowBelow: 'Añadir una fila debajo',
-        addColLeft: 'Añadir una columna a la izquierda',
-        addColRight: 'Añadir una columna a la derecha',
-        delRow: 'Borrar la fila',
-        delCol: 'Borrar la columna',
-        delTable: 'Borrar la tabla'
-      },
-      hr: {
-        insert: 'Insertar una línea horizontal'
-      },
-      style: {
-        style: 'Estilo',
-        p: 'Normal',
-        blockquote: 'Cita',
-        pre: 'Código',
-        h1: 'Título 1',
-        h2: 'Título 2',
-        h3: 'Título 3',
-        h4: 'Título 4',
-        h5: 'Título 5',
-        h6: 'Título 6'
-      },
-      lists: {
-        unordered: 'Lista',
-        ordered: 'Lista numerada'
-      },
-      options: {
-        help: 'Ayuda',
-        fullscreen: 'Pantalla completa',
-        codeview: 'Ver el código fuente'
-      },
-      paragraph: {
-        paragraph: 'Párrafo',
-        outdent: 'Reducir la sangría',
-        indent: 'Aumentar la sangría',
-        left: 'Alinear a la izquierda',
-        center: 'Centrar',
-        right: 'Alinear a la derecha',
-        justify: 'Justificar'
-      },
-      color: {
-        recent: 'Último color',
-        more: 'Más colores',
-        background: 'Color de fondo',
-        foreground: 'Color del texto',
-        transparent: 'Transparente',
-        setTransparent: 'Establecer transparente',
-        reset: 'Restablecer',
-        resetToDefault: 'Restablecer a los valores predefinidos',
-        cpSelect: 'Seleccionar'
-      },
-      shortcut: {
-        shortcuts: 'Atajos de teclado',
-        close: 'Cerrar',
-        textFormatting: 'Formato de texto',
-        action: 'Acción',
-        paragraphFormatting: 'Formato de párrafo',
-        documentStyle: 'Estilo de documento',
-        extraKeys: 'Teclas adicionales'
-      },
-      help: {
-        insertParagraph: 'Insertar un párrafo',
-        undo: 'Deshacer la última acción',
-        redo: 'Rehacer la última acción',
-        tab: 'Tabular',
-        untab: 'Eliminar tabulación',
-        bold: 'Establecer estilo negrita',
-        italic: 'Establecer estilo cursiva',
-        underline: 'Establecer estilo subrayado',
-        strikethrough: 'Establecer estilo tachado',
-        removeFormat: 'Limpiar estilo',
-        justifyLeft: 'Alinear a la izquierda',
-        justifyCenter: 'Alinear al centro',
-        justifyRight: 'Alinear a la derecha',
-        justifyFull: 'Justificar',
-        insertUnorderedList: 'Insertar lista',
-        insertOrderedList: 'Insertar lista numerada',
-        outdent: 'Reducir sangría del párrafo',
-        indent: 'Aumentar sangría del párrafo',
-        formatPara: 'Cambiar el formato del bloque actual a párrafo (etiqueta P)',
-        formatH1: 'Cambiar el formato del bloque actual a H1',
-        formatH2: 'Cambiar el formato del bloque actual a H2',
-        formatH3: 'Cambiar el formato del bloque actual a H3',
-        formatH4: 'Cambiar el formato del bloque actual a H4',
-        formatH5: 'Cambiar el formato del bloque actual a H5',
-        formatH6: 'Cambiar el formato del bloque actual a H6',
-        insertHorizontalRule: 'Insertar una línea horizontal',
-        'linkDialog.show': 'Mostrar el panel de enlaces'
-      },
-      history: {
-        undo: 'Deshacer',
-        redo: 'Rehacer'
-      },
-      specialChar: {
-        specialChar: 'CARACTERES ESPECIALES',
-        select: 'Seleccionar caracteres especiales'
-      },
-      output: {
-        noSelection: '¡No ha seleccionado nada!'
-      }
+// This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
+(() => {
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(549);
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
+
+(jquery__WEBPACK_IMPORTED_MODULE_0___default().summernote) = (jquery__WEBPACK_IMPORTED_MODULE_0___default().summernote) || {
+  lang: {}
+};
+jquery__WEBPACK_IMPORTED_MODULE_0___default().extend(true, (jquery__WEBPACK_IMPORTED_MODULE_0___default().summernote).lang, {
+  'es-ES': {
+    font: {
+      bold: 'Negrita',
+      italic: 'Cursiva',
+      underline: 'Subrayado',
+      clear: 'Eliminar Estilo de Fuente',
+      height: 'Altura de Línea',
+      name: 'Familia de Fuentes',
+      strikethrough: 'Tachado',
+      subscript: 'Subíndice',
+      superscript: 'Superíndice',
+      size: 'Tamaño de Fuente',
+      sizeunit: 'Unidad de Tamaño de Fuente'
+    },
+    image: {
+      image: 'Imagen',
+      insert: 'Insertar Imagen',
+      resizeFull: 'Redimensionar a tamaño completo',
+      resizeHalf: 'Redimensionar a la mitad',
+      resizeQuarter: 'Redimensionar a un cuarto',
+      resizeNone: 'Tamaño original',
+      floatLeft: 'Flotar a la izquierda',
+      floatRight: 'Flotar a la derecha',
+      floatNone: 'Eliminar flotado',
+      shapeRounded: 'Forma: Redondeado',
+      shapeCircle: 'Forma: Círculo',
+      shapeThumbnail: 'Forma: Miniatura',
+      shapeNone: 'Forma: Ninguna',
+      dragImageHere: 'Arrastra imagen o texto aquí',
+      dropImage: 'Suelta imagen o texto',
+      selectFromFiles: 'Seleccionar desde archivos',
+      fileNote: 'Seleccionar desde archivos después de completar los campos a continuación.',
+      maximumFileSize: 'Tamaño máximo del archivo',
+      maximumFileSizeError: 'Se excedió el tamaño máximo del archivo.',
+      url: 'URL de la imagen',
+      remove: 'Eliminar',
+      original: 'Original',
+      fileBrowser: 'Explorador de archivos',
+      title: 'Título',
+      alt: 'Texto Alternativo',
+      "class": 'Clase'
+    },
+    video: {
+      video: 'Video',
+      videoLink: 'Enlace de Video',
+      insert: 'Insertar Video',
+      url: 'URL del Video',
+      providers: '(Bilibi, Dailymotion, Facebook, Google, Instagram, Peertube, QQ, TikTok, Vimeo, WISTIA, Vine, Youku, YouTube)',
+      note: 'Nota: No todas las opciones están disponibles en todos los servicios...',
+      suggested: 'Mostrar videos sugeridos cuando termine el video',
+      controls: 'Mostrar controles del reproductor',
+      autoplay: 'Reproducción automática',
+      loop: 'Repetir',
+      aspect: 'Relación de Aspecto',
+      captions: 'Mostrar Subtítulos',
+      quality: 'Calidad del Video',
+      remove: 'Eliminar'
+    },
+    link: {
+      link: 'Enlace',
+      insert: 'Insertar Enlace',
+      unlink: 'Desvincular',
+      edit: 'Editar',
+      textToDisplay: 'Texto a mostrar',
+      url: 'URL del Enlace',
+      title: 'Título',
+      rel: 'Elegir una opción de Rel a usar',
+      openInNewWindow: 'Abrir en una nueva ventana',
+      useProtocol: 'Usar protocolo predeterminado',
+      linkList: 'Enlaces Curados'
+    },
+    table: {
+      table: 'Tabla',
+      addRowAbove: 'Agregar fila arriba',
+      addRowBelow: 'Agregar fila abajo',
+      addColLeft: 'Agregar columna a la izquierda',
+      addColRight: 'Agregar columna a la derecha',
+      delRow: 'Eliminar fila',
+      delCol: 'Eliminar columna',
+      delTable: 'Eliminar tabla'
+    },
+    hr: {
+      insert: 'Insertar Regla Horizontal'
+    },
+    block: {
+      style: 'Elementos de Bloque',
+      address: 'Dirección',
+      blockquote: 'Cita en bloque',
+      details: 'Detalles',
+      div: 'División',
+      p: 'Párrafo',
+      pre: 'Código, texto preformateado',
+      h1: 'Encabezado 1',
+      h2: 'Encabezado 2',
+      h3: 'Encabezado 3',
+      h4: 'Encabezado 4',
+      h5: 'Encabezado 5',
+      h6: 'Encabezado 6'
+    },
+    inline: {
+      style: 'Elementos en línea',
+      abbr: 'Abreviatura',
+      b: 'Negrita',
+      cite: 'Cita',
+      code: 'Código',
+      del: 'Eliminado',
+      em: 'Énfasis',
+      figure: 'Figura',
+      figcaption: 'Pie de Figura',
+      i: 'Cursiva',
+      ins: 'Insertar',
+      kbd: 'Teclado',
+      mark: 'Marca',
+      picture: 'Imagen',
+      q: 'Cita',
+      s: 'Tachado',
+      samp: 'Muestra',
+      small: 'Pequeño',
+      span: 'Span',
+      strong: 'Fuerte',
+      sub: 'Subíndice',
+      sup: 'Superíndice',
+      time: 'Tiempo',
+      u: 'Subrayado',
+      "var": 'Variable'
+    },
+    zoom: {
+      "in": 'Acercar',
+      value: 'Valor de Zoom',
+      out: 'Alejar'
+    },
+    lists: {
+      unordered: 'Lista no ordenada',
+      ordered: 'Lista ordenada'
+    },
+    options: {
+      help: 'Ayuda',
+      fullscreen: 'Pantalla Completa',
+      codeview: 'Vista de Código'
+    },
+    paragraph: {
+      paragraph: 'Párrafo',
+      outdent: 'Disminuir Sangría',
+      indent: 'Aumentar Sangría',
+      left: 'Alinear a la izquierda',
+      center: 'Alinear al centro',
+      right: 'Alinear a la derecha',
+      justify: 'Justificar'
+    },
+    color: {
+      recent: 'Color Reciente',
+      more: 'Más Colores',
+      background: 'Color de Fondo',
+      foreground: 'Color de Texto',
+      transparent: 'Transparente',
+      setTransparent: 'Establecer transparente',
+      reset: 'Restablecer',
+      resetToDefault: 'Restablecer a predeterminado',
+      cpSelect: 'Seleccionar'
+    },
+    shortcut: {
+      shortcuts: 'Atajos de teclado',
+      close: 'Cerrar',
+      textFormatting: 'Formato de texto',
+      action: 'Acción',
+      paragraphFormatting: 'Formato de párrafo',
+      documentStyle: 'Estilo del documento',
+      extraKeys: 'Teclas adicionales'
+    },
+    help: {
+      'escape': 'Escape/Cerrar',
+      'insertParagraph': 'Párrafo',
+      'undo': 'Deshacer',
+      'redo': 'Rehacer',
+      'tab': 'Tabulación',
+      'untab': 'Retirar tabulación',
+      'bold': 'Negrita',
+      'italic': 'Cursiva',
+      'underline': 'Subrayado',
+      'strikethrough': 'Tachado',
+      'removeFormat': 'Limpiar Estilos',
+      'justifyLeft': 'Alinear a la izquierda',
+      'justifyCenter': 'Alinear al centro',
+      'justifyRight': 'Alinear a la derecha',
+      'justifyFull': 'Alinear justificado',
+      'insertUnorderedList': 'Lista no ordenada',
+      'insertOrderedList': 'Lista ordenada',
+      'outdent': 'Disminuir sangría',
+      'indent': 'Aumentar sangría',
+      'formatPara': 'Párrafo',
+      'formatH1': 'Encabezado H1',
+      'formatH2': 'Encabezado H2',
+      'formatH3': 'Encabezado H3',
+      'formatH4': 'Encabezado H4',
+      'formatH5': 'Encabezado H5',
+      'formatH6': 'Encabezado H6',
+      'insertHorizontalRule': 'Insertar Regla Horizontal',
+      'linkDialog.show': 'Mostrar cuadro de diálogo de enlace',
+      'imageDialog.show': 'Mostrar cuadro de diálogo de imagen',
+      'videoDialog.show': 'Mostrar cuadro de diálogo de video',
+      'helpDialog.show': 'Mostrar cuadro de diálogo de ayuda'
+    },
+    history: {
+      undo: 'Deshacer',
+      redo: 'Rehacer'
+    },
+    specialChar: {
+      specialChar: 'CARACTERES ESPECIALES',
+      select: 'Seleccionar caracteres especiales'
+    },
+    output: {
+      noSelection: '¡No se ha realizado ninguna selección!'
     }
-  });
-})(jQuery);
+  }
+});
+})();
+
 /******/ 	return __webpack_exports__;
 /******/ })()
 ;

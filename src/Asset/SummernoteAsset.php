@@ -35,8 +35,8 @@ final class SummernoteAsset extends AssetBundle
 
         $language = Yii::$app->language;
 
-        $assetCss = YII_ENV === 'prod' ? 'css/summernote-bs5.min.css' : 'css/summernote-bs5.css';
-        $assetJs = YII_ENV === 'prod' ? 'js/summernote-bs5.min.js' : 'js/summernote-bs5.js';
+        $assetCss = YII_ENV === 'prod' ? 'css/summernote.min.css' : 'css/summernote.css';
+        $assetJs = YII_ENV === 'prod' ? 'js/summernote.min.js' : 'js/summernote.js';
         $assetLang = YII_ENV === 'prod' ? "lang/summernote-$language.min.js" : "lang/summernote-$language.js";
 
         $this->css[] = $assetCss;
@@ -54,7 +54,7 @@ final class SummernoteAsset extends AssetBundle
         $only = array_merge(
             $only,
             YII_ENV === 'prod'
-                ? ['css/summernote-bs5.min.css.map', 'js/summernote-bs5.min.js.map'] : ["lang/summernote-$language.js.map"]
+                ? ['css/summernote.min.css.map', 'js/summernote.min.js.map'] : ["lang/summernote-$language.js.map"]
         );
 
         $this->publishOptions['only'] = $only;

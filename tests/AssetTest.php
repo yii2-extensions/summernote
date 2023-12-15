@@ -47,10 +47,8 @@ final class AssetTest extends TestCase
         $language = Yii::$app->language;
         $result = $this->view->renderFile(__DIR__ . '/Support/main.php', ['widget' => '']);
 
-        $this->assertStringContainsString('bootstrap.css', $result);
-        $this->assertStringContainsString('summernote-bs5.css', $result);
-        $this->assertStringContainsString('bootstrap.bundle.js', $result);
-        $this->assertStringContainsString('summernote-bs5.js', $result);
+        $this->assertStringContainsString('summernote.css', $result);
+        $this->assertStringContainsString('summernote.js', $result);
         $this->assertStringContainsString("lang/summernote-$language.js", $result);
     }
 }

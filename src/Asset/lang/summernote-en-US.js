@@ -1,33 +1,35 @@
 /*!
  * 
- * Super simple WYSIWYG editor v0.8.20
+ * Summernote Skunkworks
+ *
+ * The Super simple WYSIWYG editor.
+ *
  * https://summernote.org
  *
- *
- * Copyright 2013- Alan Hong and contributors
+ * Copyright 2013- Alan Hong and Contributors
  * Summernote may be freely distributed under the MIT license.
  *
- * Date: 2021-10-14T21:15Z
+ * Date: 2023-12-15T15:47Z
  *
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory(require("jQuery"));
+		module.exports = factory(require("jquery"));
 	else if(typeof define === 'function' && define.amd)
-		define(["jQuery"], factory);
+		define(["jquery"], factory);
 	else {
-		var a = typeof exports === 'object' ? factory(require("jQuery")) : factory(root["jQuery"]);
+		var a = typeof exports === 'object' ? factory(require("jquery")) : factory(root["jQuery"]);
 		for(var i in a) (typeof exports === 'object' ? exports : root)[i] = a[i];
 	}
-})(self, function(__WEBPACK_EXTERNAL_MODULE__1145__) {
+})(self, (__WEBPACK_EXTERNAL_MODULE__549__) => {
 return /******/ (() => { // webpackBootstrap
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
-/***/ 1145:
+/***/ 549:
 /***/ ((module) => {
 
-module.exports = __WEBPACK_EXTERNAL_MODULE__1145__;
+module.exports = __WEBPACK_EXTERNAL_MODULE__549__;
 
 /***/ })
 
@@ -103,13 +105,13 @@ var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
 (() => {
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1145);
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(549);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
 
 (jquery__WEBPACK_IMPORTED_MODULE_0___default().summernote) = (jquery__WEBPACK_IMPORTED_MODULE_0___default().summernote) || {
   lang: {}
 };
-jquery__WEBPACK_IMPORTED_MODULE_0___default().extend((jquery__WEBPACK_IMPORTED_MODULE_0___default().summernote.lang), {
+jquery__WEBPACK_IMPORTED_MODULE_0___default().extend(true, (jquery__WEBPACK_IMPORTED_MODULE_0___default().summernote).lang, {
   'en-US': {
     font: {
       bold: 'Bold',
@@ -141,18 +143,32 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default().extend((jquery__WEBPACK_IMPORTED_M
       dragImageHere: 'Drag image or text here',
       dropImage: 'Drop image or Text',
       selectFromFiles: 'Select from files',
+      fileNote: 'Select from files after filling in below fields.',
       maximumFileSize: 'Maximum file size',
       maximumFileSizeError: 'Maximum file size exceeded.',
       url: 'Image URL',
-      remove: 'Remove Image',
-      original: 'Original'
+      remove: 'Remove',
+      original: 'Original',
+      fileBrowser: 'File&nbsp;Browser',
+      title: 'Title',
+      alt: 'Alt',
+      "class": 'Class'
     },
     video: {
       video: 'Video',
       videoLink: 'Video Link',
       insert: 'Insert Video',
       url: 'Video URL',
-      providers: '(YouTube, Google Drive, Vimeo, Vine, Instagram, DailyMotion, Youku, Peertube)'
+      providers: '(Bilibi, Dailymotion, Facebook, Google, Instagram, Peertube, QQ, TikTok, Vimeo, WISTIA, Vine, Youku, YouTube)',
+      note: 'Note: Not all options are available with all services...',
+      suggested: 'Show Suggested videos when the video finishes',
+      controls: 'Show player controls',
+      autoplay: 'Autoplay',
+      loop: 'Loop',
+      aspect: 'Aspect Ratio',
+      captions: 'Show Captions',
+      quality: 'Video Quality',
+      remove: 'Remove'
     },
     link: {
       link: 'Link',
@@ -160,9 +176,12 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default().extend((jquery__WEBPACK_IMPORTED_M
       unlink: 'Unlink',
       edit: 'Edit',
       textToDisplay: 'Text to display',
-      url: 'To what URL should this link go?',
+      url: 'Link URL',
+      title: 'Title',
+      rel: 'Choose a Rel option to use',
       openInNewWindow: 'Open in new window',
-      useProtocol: 'Use default protocol'
+      useProtocol: 'Use default protocol',
+      linkList: 'Curated Links'
     },
     table: {
       table: 'Table',
@@ -177,17 +196,52 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default().extend((jquery__WEBPACK_IMPORTED_M
     hr: {
       insert: 'Insert Horizontal Rule'
     },
-    style: {
-      style: 'Style',
-      p: 'Normal',
-      blockquote: 'Quote',
-      pre: 'Code',
+    block: {
+      style: 'Block Elements',
+      address: 'Address',
+      blockquote: 'Blockquote',
+      details: 'Details',
+      div: 'Division',
+      p: 'Paragraph',
+      pre: 'Code, preformatted text',
       h1: 'Header 1',
       h2: 'Header 2',
       h3: 'Header 3',
       h4: 'Header 4',
       h5: 'Header 5',
       h6: 'Header 6'
+    },
+    inline: {
+      style: 'Inline Elements',
+      abbr: 'Abbreviation',
+      b: 'Bold',
+      cite: 'Citation',
+      code: 'Code',
+      del: 'Deleted',
+      em: 'Emphasis',
+      figure: 'Figure',
+      figcaption: 'Figure Caption',
+      i: 'Italic',
+      ins: 'Insert',
+      kbd: 'Keyboard',
+      mark: 'Mark',
+      picture: 'Picture',
+      q: 'Quotation',
+      s: 'Strikethrough',
+      samp: 'Sample',
+      small: 'Small',
+      span: 'Span',
+      strong: 'Strong',
+      sub: 'Sub',
+      sup: 'Sup',
+      time: 'Time',
+      u: 'Underline',
+      "var": 'Var'
+    },
+    zoom: {
+      "in": 'Zoom in',
+      value: 'Zoom value',
+      out: 'Zoom out'
     },
     lists: {
       unordered: 'Unordered list',
@@ -228,34 +282,37 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default().extend((jquery__WEBPACK_IMPORTED_M
       extraKeys: 'Extra keys'
     },
     help: {
-      'escape': 'Escape',
-      'insertParagraph': 'Insert Paragraph',
-      'undo': 'Undo the last command',
-      'redo': 'Redo the last command',
+      'escape': 'Escape/Close',
+      'insertParagraph': 'Paragraph',
+      'undo': 'Undo',
+      'redo': 'Redo',
       'tab': 'Tab',
       'untab': 'Untab',
-      'bold': 'Set a bold style',
-      'italic': 'Set a italic style',
-      'underline': 'Set a underline style',
-      'strikethrough': 'Set a strikethrough style',
-      'removeFormat': 'Clean a style',
-      'justifyLeft': 'Set left align',
-      'justifyCenter': 'Set center align',
-      'justifyRight': 'Set right align',
-      'justifyFull': 'Set full align',
-      'insertUnorderedList': 'Toggle unordered list',
-      'insertOrderedList': 'Toggle ordered list',
-      'outdent': 'Outdent on current paragraph',
-      'indent': 'Indent on current paragraph',
-      'formatPara': 'Change current block\'s format as a paragraph(P tag)',
-      'formatH1': 'Change current block\'s format as H1',
-      'formatH2': 'Change current block\'s format as H2',
-      'formatH3': 'Change current block\'s format as H3',
-      'formatH4': 'Change current block\'s format as H4',
-      'formatH5': 'Change current block\'s format as H5',
-      'formatH6': 'Change current block\'s format as H6',
-      'insertHorizontalRule': 'Insert horizontal rule',
-      'linkDialog.show': 'Show Link Dialog'
+      'bold': 'Bold',
+      'italic': 'Italic',
+      'underline': 'Underline',
+      'strikethrough': 'Strikethrough',
+      'removeFormat': 'Clean Styles',
+      'justifyLeft': 'Left Align',
+      'justifyCenter': 'Center Align',
+      'justifyRight': 'Right Align',
+      'justifyFull': 'Full Align',
+      'insertUnorderedList': 'Unordered List',
+      'insertOrderedList': 'Ordered List',
+      'outdent': 'Outdent',
+      'indent': 'Indent',
+      'formatPara': 'Paragraph',
+      'formatH1': 'H1 Header',
+      'formatH2': 'H2 Header',
+      'formatH3': 'H3 Header',
+      'formatH4': 'H4 Header',
+      'formatH5': 'H5 Header',
+      'formatH6': 'H6 Header',
+      'insertHorizontalRule': 'Horizontal Rule',
+      'linkDialog.show': 'Show Link Dialog',
+      'imageDialog.show': 'Show Image Dialog',
+      'videoDialog.show': 'Show Video Dialog',
+      'helpDialog.show': 'Show Help Dialog'
     },
     history: {
       undo: 'Undo',
