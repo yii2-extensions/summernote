@@ -9,7 +9,7 @@
  * Copyright 2013- Alan Hong and Contributors
  * Summernote may be freely distributed under the MIT license.
  *
- * Date: 2023-12-15T14:46Z
+ * Date: 2023-12-15T15:47Z
  *
  */
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -128,12 +128,12 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default().extend(true, (jquery__WEBPACK_IMPO
       div: 'Division',
       p: 'Paragraph',
       pre: 'Code, preformatted text',
-      h1: 'Heading 1',
-      h2: 'Heading 2',
-      h3: 'Heading 3',
-      h4: 'Heading 4',
-      h5: 'Heading 5',
-      h6: 'Heading 6'
+      h1: 'Header 1',
+      h2: 'Header 2',
+      h3: 'Header 3',
+      h4: 'Header 4',
+      h5: 'Header 5',
+      h6: 'Header 6'
     },
     inline: {
       style: 'Inline Elements',
@@ -226,12 +226,12 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default().extend(true, (jquery__WEBPACK_IMPO
       'outdent': 'Outdent',
       'indent': 'Indent',
       'formatPara': 'Paragraph',
-      'formatH1': 'H1 Heading',
-      'formatH2': 'H2 Heading',
-      'formatH3': 'H3 Heading',
-      'formatH4': 'H4 Heading',
-      'formatH5': 'H5 Heading',
-      'formatH6': 'H6 Heading',
+      'formatH1': 'H1 Header',
+      'formatH2': 'H2 Header',
+      'formatH3': 'H3 Header',
+      'formatH4': 'H4 Header',
+      'formatH5': 'H5 Header',
+      'formatH6': 'H6 Header',
       'insertHorizontalRule': 'Horizontal Rule',
       'linkDialog.show': 'Show Link Dialog',
       'imageDialog.show': 'Show Image Dialog',
